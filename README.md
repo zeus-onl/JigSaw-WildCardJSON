@@ -1,4 +1,4 @@
-# JigSaw Wildcard (JSON) 🍳
+# JigSaw Wildcard (JSON) 🍳 (Full Original Node Pack here: https://github.com/ltdrdata/ComfyUI-Impact-Pack)
 
 **Author:** Jigsaw & Zeus — [zeus.onl](https://zeus.onl)
 **Category:** `🍳 Jigsaw/Prompt`
