@@ -9,6 +9,30 @@ wildcard-style text prompts and **structured JSON prompt templates** — without
 corrupting the JSON structure, which is what happens when you feed JSON into
 Impact Pack's `ImpactWildcardProcessor`.
 
+NOTE! JSON FORMAT ERROR!
+
+Found it — the problem is on the `"height"` line:
+
+```json
+"height": "5'6"",
+```
+
+The inch mark (`"`) after `6` is the exact same character JSON uses to open and close text values. JSON can't tell the difference between "this quote ends the text" and "this quote is part of the text" — so as soon as it hits that second `"`, it thinks your value already ended and gets confused by the extra character right after it. That one unescaped quote breaks the entire JSON file, even though everything else looks correct.
+
+**Fix:** put a backslash before the inch mark so JSON knows it's part of the value, not the end of it:
+
+```json
+"height": "5'6\"",
+```
+
+Or simpler, just avoid the quote symbol entirely:
+
+```json
+"height": "5 foot 6 inches",
+```
+
+General rule for the future: any literal `"` character inside a JSON string value always needs a `\` in front of it (`\"`), or JSON will read it as the end of that value.
+
 ---
 
 ## Why this node exists
